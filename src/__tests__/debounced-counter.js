@@ -41,6 +41,7 @@ afterEach(() => {
 
 // I'd really like to see if there's a way we can make it so people using
 // React Testing Library utilities very rarely need to use `act`
+// And after further investigation, it does work! woo!
 test('increments count after 300ms', async () => {
   const {getByText} = render(<DebouncedCounter />)
   const count = getByText('0')
@@ -56,7 +57,6 @@ test('increments count after 300ms', async () => {
   // https://github.com/testing-library/dom-testing-library/blob/d719edd658ce6ad616f2632f378b3a7f4bf03897/src/wait-for-element.js#L65
   await waitForDomChange(() => expect(count).toHaveTextContent('1'))
 
-  // I believe this is why the test is passing, but I don't understand why I'm still getting the error
   expect(console.info).toHaveBeenCalledTimes(2)
   expect(console.info).toHaveBeenNthCalledWith(1, 0)
   expect(console.info).toHaveBeenNthCalledWith(2, 1)
