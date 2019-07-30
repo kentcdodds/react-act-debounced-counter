@@ -42,7 +42,10 @@ afterEach(() => {
 test('no act needed', async () => {
   window.fetch.mockResolvedValueOnce({json: async () => ({foo: 'bar'})})
   const url = 'https://api.example.com/foo'
+  // render is wrapped in `act`
   const {findByText} = render(<FetchThing url={url} />)
+
+  // findByText leaverages waitForDomChange under the hood which is wrapped in an async act.
   await findByText(/data: true/i)
   expect(window.fetch).toHaveBeenCalledTimes(1)
   expect(window.fetch).toHaveBeenCalledWith(url)
