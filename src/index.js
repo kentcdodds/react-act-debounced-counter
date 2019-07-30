@@ -1,9 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import DebouncedCounter from './debounced-counter'
 
 function App() {
-  return <DebouncedCounter />
+  return 'Checkout the tests'
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
